@@ -1,0 +1,20 @@
+name: Deploy bootcamp2020c12
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install NodeJS
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+      - name: Install Surge
+        run: npm install -g surge
+      - name: Run Surge
+        run: surge ./ http://hassanalikhan-bc2020c12.surge.sh --token ${{secrets.surge_token}}
+      
